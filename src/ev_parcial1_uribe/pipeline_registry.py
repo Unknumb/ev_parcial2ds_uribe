@@ -12,5 +12,9 @@ def register_pipelines() -> dict[str, Pipeline]:
         A mapping from pipeline names to ``Pipeline`` objects.
     """
     pipelines = find_pipelines(raise_errors=True)
-    pipelines["__default__"] = sum(pipelines.values())
+    
+    if "machine_learning" in pipelines:
+        pipelines["ml"] = pipelines["machine_learning"]
+        
+    pipelines["__default__"] = sum(p for k, p in pipelines.items() if k != "ml")
     return pipelines

@@ -17,6 +17,8 @@ dependencies = [
     "scikit-learn>=1.7.2",
     "seaborn>=0.13.2",
     "matplotlib>=3.10.9",
+    "imbalanced-learn>=0.14.1",
+    "xgboost>=3.2.0",
 ]
 
 [project.scripts]

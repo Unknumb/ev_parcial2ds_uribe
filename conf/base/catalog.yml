@@ -113,3 +113,9 @@ reporte_rendimiento:
   fs_args:
     open_args_save:
       encoding: utf-8
+
+# --- CAPA 06: MODELOS (MACHINE LEARNING) ---
+classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/random_forest_model.pkl
+  versioned: true
