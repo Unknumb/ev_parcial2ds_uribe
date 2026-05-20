@@ -16,5 +16,8 @@ def register_pipelines() -> dict[str, Pipeline]:
     if "machine_learning" in pipelines:
         pipelines["ml"] = pipelines["machine_learning"]
         
-    pipelines["__default__"] = sum(p for k, p in pipelines.items() if k != "ml")
+    if "ml_regression" in pipelines:
+        pipelines["ml_regression"] = pipelines["ml_regression"]
+        
+    pipelines["__default__"] = sum(p for k, p in pipelines.items() if k not in ["ml", "ml_regression"])
     return pipelines

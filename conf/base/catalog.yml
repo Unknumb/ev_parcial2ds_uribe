@@ -119,3 +119,8 @@ classifier_model:
   type: pickle.PickleDataset
   filepath: data/06_models/random_forest_model.pkl
   versioned: true
+
+regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/random_forest_regressor_model.pkl
+  versioned: true
