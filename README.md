@@ -1,101 +1,60 @@
-# ev_parcial1_uribe
+# Proyecto de Modelado de Deserción y Rendimiento Estudiantil (Kedro)
 
 [![Powered by Kedro](https://img.shields.io/badge/powered_by-kedro-ffc900?logo=kedro)](https://kedro.org)
 
-## Overview
+## Descripción General
 
-This is your new Kedro project, which was generated using `kedro 1.3.1`.
+Este proyecto utiliza la arquitectura avanzada **Kedro** para la orquestación y desarrollo de modelos de Machine Learning. Dado que el curso requiere una estructura de carpetas específica para la evaluación, se ha realizado un mapeo ("wrapper") para cumplir con los requerimientos de entrega sin comprometer la reproducibilidad técnica de Kedro.
 
-Take a look at the [Kedro documentation](https://docs.kedro.org) to get started.
+## Mapeo de la Rúbrica (Estructura Solicitada)
 
-## Rules and guidelines
+A continuación, se detalla dónde encontrar los entregables solicitados:
 
-In order to get the best out of the template:
+### 1. Notebooks (`notebooks/`)
+Los notebooks principales solicitados se encuentran numerados del 01 al 05 en la raíz de la carpeta `notebooks/`:
+- `01_exploratory_analysis.ipynb`: Análisis exploratorio, visualizaciones y patrones.
+- `02_supervised_modeling.ipynb`: Implementación de modelos base.
+- `03_model_evaluation.ipynb`: Evaluación comparativa y métricas.
+- `04_hyperparameter_optimization.ipynb`: Optimización de hiperparámetros.
+- `05_final_analysis.ipynb`: Análisis final e integración.
 
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a data engineering convention
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
+> **Nota:** Los notebooks extra que detallan pruebas avanzadas y experimentación (`06_regression_modeling.ipynb` y `07_model_shootout.ipynb`) también se encuentran en esta carpeta como complemento a los requisitos. Archivos de pruebas y borradores se han movido a `notebooks/extras/`.
 
-## How to install dependencies
+### 2. Código Fuente (`src/`)
+El código real de los pipelines se ejecuta mediante Kedro, pero para facilitar la revisión y cumplir con la estructura requerida, se han expuesto las lógicas en los siguientes archivos (que actúan como origen de funciones para los nodos de Kedro):
+- `src/data_preprocessing.py`: Funciones de limpieza, transformación y tabla maestra.
+- `src/model_training.py`: Definición, partición (split) y entrenamiento de modelos.
+- `src/model_evaluation.py`: Funciones para evaluación experta y reportes métricos.
+- `src/hyperparameter_tuning.py`: Lógica para búsqueda en grilla y validación cruzada.
 
-Declare any dependencies in `requirements.txt` for `pip` installation.
+*El paquete completo de Kedro se encuentra dentro de `src/ev_parcial1_uribe/`.*
 
-To install them, run:
+### 3. Modelos y Resultados
+Por diseño, Kedro gestiona las salidas a través de su Data Catalog (`conf/base/catalog.yml`). Se han reconfigurado las rutas para apuntar a:
+- **Modelos:** `models/trained_models/` (contiene los `.pkl` finales).
+- **Resultados y Reportes:** `results/reports/`, `results/metrics/` y `results/plots/`.
 
-```
+---
+
+## Cómo Ejecutar el Proyecto
+
+Este proyecto mantiene la compatibilidad total con Kedro.
+
+### 1. Instalar Dependencias
+Asegúrate de contar con el entorno activado e instalar los requerimientos:
+```bash
 pip install -r requirements.txt
 ```
 
-## How to run your Kedro pipeline
-
-You can run your Kedro project with:
-
-```
+### 2. Ejecutar el Pipeline Completo
+Para correr todo el flujo de datos, limpieza, entrenamiento y reporte, utiliza:
+```bash
 kedro run
 ```
+Todos los modelos y reportes se guardarán automáticamente en sus carpetas respectivas configuradas.
 
-## How to test your Kedro project
-
-Have a look at the file `tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
-
-```
-pytest
-```
-
-You can configure the coverage threshold in your project's `pyproject.toml` file under the `[tool.coverage.report]` section.
-
-
-## Project dependencies
-
-To see and update the dependency requirements for your project use `requirements.txt`. You can install the project requirements with `pip install -r requirements.txt`.
-
-[Further information about project dependencies](https://docs.kedro.org/en/stable/kedro_project_setup/dependencies.html#project-specific-dependencies)
-
-## How to work with Kedro and notebooks
-
-> Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `context`, 'session', `catalog`, and `pipelines`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `pip install -r requirements.txt` you will not need to take any extra steps before you use them.
-
-### Jupyter
-To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
-
-```
-pip install jupyter
-```
-
-After installing Jupyter, you can start a local notebook server:
-
-```
-kedro jupyter notebook
-```
-
-### JupyterLab
-To use JupyterLab, you need to install it:
-
-```
-pip install jupyterlab
-```
-
-You can also start JupyterLab:
-
-```
+### 3. Ejecutar Jupyter
+Para abrir la interfaz clásica con las variables de Kedro cargadas (`catalog`, `context`, etc.):
+```bash
 kedro jupyter lab
 ```
-
-### IPython
-And if you want to run an IPython session:
-
-```
-kedro ipython
-```
-
-### How to ignore notebook output cells in `git`
-To automatically strip out all output cell contents before committing to `git`, you can use tools like [`nbstripout`](https://github.com/kynan/nbstripout). For example, you can add a hook in `.git/config` with `nbstripout --install`. This will run `nbstripout` before anything is committed to `git`.
-
-> *Note:* Your output cells will be retained locally.
-
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://docs.kedro.org/en/stable/deploy/package_a_project/#package-an-entire-kedro-project)

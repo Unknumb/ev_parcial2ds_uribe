@@ -96,7 +96,7 @@ tabla_maestra_primaria:
     # --- CAPA 08: REPORTING (REPORTES FINALES) ---
 reporte_desercion:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/reporte_desercion.csv
+  filepath: results/reports/reporte_desercion.csv
   save_args:
     index: False
     encoding: utf-8
@@ -106,7 +106,7 @@ reporte_desercion:
 
 reporte_rendimiento:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/reporte_rendimiento.csv
+  filepath: results/reports/reporte_rendimiento.csv
   save_args:
     index: False
     encoding: utf-8
@@ -117,10 +117,10 @@ reporte_rendimiento:
 # --- CAPA 06: MODELOS (MACHINE LEARNING) ---
 classifier_model:
   type: pickle.PickleDataset
-  filepath: data/06_models/random_forest_model.pkl
+  filepath: models/trained_models/random_forest_model.pkl
   versioned: true
 
 regression_model:
   type: pickle.PickleDataset
-  filepath: data/06_models/random_forest_regressor_model.pkl
+  filepath: models/trained_models/random_forest_regressor_model.pkl
   versioned: true
